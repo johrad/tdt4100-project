@@ -22,4 +22,7 @@ The storing of data can utilize observatory technique.
  * Listener trigger saving to file functionality. 
 
 
-When it comes to saving the data for each workout, A simple solution would be to to just save "previous workout". But another way is to use a csv/text-file for each workout, with total volume and timestamp.
+Easiest would be to just save the workout itself. i.e. Don't care about individual movements. It can all be saved into a csv file like:
+```csv
+String workout_name, int reps, double weight, date (?)
+```
