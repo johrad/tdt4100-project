@@ -1,5 +1,6 @@
 package workoutLogger;
 
+import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ public class Exercise implements ExerciseInterface {
   private final String name;
   private List<Integer> reps = new ArrayList<>();
   private List<Double> weight = new ArrayList<>();
+
+  private int[] PR = new int[2];
 
   public Exercise(String name) {
     if (name.length() >= 3) {
@@ -23,18 +26,32 @@ public class Exercise implements ExerciseInterface {
     return (
       this.name +
       " (Last workout): " +
-      this.prevReps() +
+      this.latestReps() +
       " reps @ " +
-      this.prevWeight()
+      this.latestWeight() +
+      "kg"
     );
   }
 
-  private int prevReps() {
+  private int latestReps() {
     return this.reps.get(this.reps.size() - 1);
   }
 
-  private double prevWeight() {
+  private double latestWeight() {
     return this.weight.get(this.weight.size() - 1);
+  }
+
+  @Override
+  public void logSet(int reps, double weight) {
+    this.logReps(reps);
+    this.logWeight(weight);
+
+    double vol = reps * weight;
+
+    if (vol > (PR[0] * PR[1])) {
+      this.PR[0] = reps;
+      this.PR[1] = (int) weight; // FIX THIS !!
+    }
   }
 
   @Override
@@ -45,8 +62,8 @@ public class Exercise implements ExerciseInterface {
   //
   // TODO:  Feilhåndtering here??
   //
-  @Override
-  public void logReps(int reps) {
+
+  private void logReps(int reps) {
     if (reps >= 0) {
       this.reps.add(reps);
     } else {
@@ -54,8 +71,7 @@ public class Exercise implements ExerciseInterface {
     }
   }
 
-  @Override
-  public void logWeight(double weight) {
+  private void logWeight(double weight) {
     if (weight > 0) {
       this.weight.add(weight);
     } else {
@@ -64,15 +80,20 @@ public class Exercise implements ExerciseInterface {
   }
 
   @Override
-  public double getVolume() {}
+  public double getVolume() {
+    return this.latestWeight() * this.latestReps();
+  }
 
   @Override
-  public Integer[] getPR() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getPR'");
+  public int[] getPR() {
+    return this.PR;
   }
 
   public static void main(String[] args) {
-    System.out.println("compiled without errors !");
+    Exercise bench = new Exercise("Bench Press");
+    bench.logSet(10, 100000);
+    bench.logSet(10, 53.5);
+    System.out.println(bench.toString());
+    System.out.println(bench.getPR()[1]);
   }
 }
