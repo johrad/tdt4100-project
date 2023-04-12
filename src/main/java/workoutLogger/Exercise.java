@@ -1,6 +1,5 @@
 package workoutLogger;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ public class Exercise implements ExerciseInterface {
 
   private int[] PR = new int[2];
 
+  // Contructor for creating the workout
   public Exercise(String name) {
     if (name.length() >= 3) {
       this.name = name;
@@ -20,6 +20,19 @@ public class Exercise implements ExerciseInterface {
         "Name too short, must be at least 3 characters"
       );
     }
+  }
+
+  // Constructor for restoring data from file. No error checking here because  we assume the user cannot go in and fuck with the files
+  public Exercise(
+    String name,
+    List<Integer> reps,
+    List<Double> weight,
+    int[] pR
+  ) {
+    this.name = name;
+    this.reps = reps;
+    this.weight = weight;
+    PR = pR;
   }
 
   public String toString() {
