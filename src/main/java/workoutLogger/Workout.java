@@ -9,7 +9,7 @@ public class Workout {
   private List<Exercise> exercises = new ArrayList<>();
 
   public Workout(String workoutName) {
-    if (workoutName.length() >= 3) {
+    if (workoutName.length() >= 3) { // add check if workout exists in save-data
       this.workoutName = workoutName;
     } else {
       throw new IllegalArgumentException(

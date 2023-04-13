@@ -13,7 +13,7 @@ public class Exercise implements ExerciseInterface {
 
   // Contructor for creating the workout
   public Exercise(String name) {
-    if (name.length() >= 3) {
+    if (name.length() >= 3) { // add check if exercise exists in save-data
       this.name = name;
     } else {
       throw new IllegalArgumentException(
