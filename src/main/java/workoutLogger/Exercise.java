@@ -22,7 +22,7 @@ public class Exercise implements ExerciseInterface {
     }
   }
 
-  // Constructor for restoring data from file. No error checking here because  we assume the user cannot go in and fuck with the files
+  // Constructor for restoring data from file. No error checking here, as we assume the user cannot go in and fuck with the files
   public Exercise(
     String name,
     List<Integer> reps,

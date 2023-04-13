@@ -18,11 +18,12 @@ public class Workout {
     }
   }
 
-  public List<Exercise> getExercises() {
-    return exercises;
+  public Exercise getExercise(int index) {
+    return this.exercises.get(index);
   }
 
-  public void setExercises(List<Exercise> exercises) {
-    this.exercises = exercises;
+  public void addExercise(Exercise exercise) {
+    // add error checking
+    this.exercises.add(exercise);
   }
 }
