@@ -47,11 +47,19 @@ public class Exercise implements ExerciseInterface {
   }
 
   private int latestReps() {
-    return this.reps.get(this.reps.size() - 1);
+    if (this.reps.size() < 1) {
+      return 0;
+    } else {
+      return this.reps.get(this.reps.size() - 1);
+    }
   }
 
   private double latestWeight() {
-    return this.weight.get(this.weight.size() - 1);
+    if (this.weight.size() < 1) {
+      return 0;
+    } else {
+      return this.weight.get(this.weight.size() - 1);
+    }
   }
 
   @Override
@@ -104,18 +112,18 @@ public class Exercise implements ExerciseInterface {
 
   public static void main(String[] args) {
     // Exercise bench = new Exercise("Bench Press");
-    // bench.logSet(10, 100000);
-    // bench.logSet(10, 53.5);
-    // System.out.println(bench.toString());
-    // System.out.println(bench.getPR()[1]);
-    int i = 0;
-    List<Exercise> exerciseList = new ArrayList<>();
-    while (i < 5) {
-      String name = "exercise_" + i;
-      exerciseList.add(new Exercise(name));
-      i++;
-    }
+    // // bench.logSet(10, 100000);
+    // // bench.logSet(10, 53.5);
+    // // System.out.println(bench.toString());
+    // // System.out.println(bench.getPR()[1]);
+    // int i = 0;
+    // List<Exercise> exerciseList = new ArrayList<>();
+    // while (i < 5) {
+    //   String name = "exercise_" + i;
+    //   exerciseList.add(new Exercise(name));
+    //   i++;
+    // }
 
-    System.out.println(exerciseList.get(2).getName());
+    // System.out.println(exerciseList.get(2).getName());
   }
 }
