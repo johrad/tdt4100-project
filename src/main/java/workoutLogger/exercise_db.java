@@ -5,47 +5,44 @@ import java.util.Collection;
 
 public class exercise_db {
 
-    private Collection<Exercise> exerciseCollection = new ArrayList<>();
+  private Collection<Exercise> exerciseCollection = new ArrayList<>();
 
-    public void add(Exercise exercise) {
-        this.exerciseCollection.add(exercise);
+  public void add(Exercise exercise) {
+    this.exerciseCollection.add(exercise);
+  }
+
+  public Exercise get(String name) {
+    Exercise ex = null;
+    for (Exercise e : this.exerciseCollection) {
+      if (e.getName().equalsIgnoreCase(name)) {
+        ex = e;
+      }
     }
-
-    public Exercise get(String name) {
-        Exercise ex = null;
-        for (Exercise e : this.exerciseCollection) {
-            if (e.getName().equalsIgnoreCase(name)) {
-                ex = e;
-            }
-        }
-        if (ex == null) {
-            throw new IllegalAccessError("Workout not in database")
-        } else {
-            return ex;
-        }
+    if (ex == null) {
+      throw new IllegalAccessError("Workout not in database");
+    } else {
+      return ex;
     }
+  }
 
-    public void remove(Exercise exercise){
-        if (this.exerciseCollection.contains(exercise)) {
-            this.exerciseCollection.remove(exercise);
-        } else {
-            throw new IllegalArgumentException("Exercise not in list, cannot remove");
-        }
+  public void remove(Exercise exercise) {
+    if (this.exerciseCollection.contains(exercise)) {
+      this.exerciseCollection.remove(exercise);
+    } else {
+      throw new IllegalArgumentException("Exercise not in list, cannot remove");
     }
-    
-    
-  
+  }
 
-//   public static void main(String[] args) {
-//     Exercise ex1 = new Exercise("deadlift");
-//     Exercise ex2 = new Exercise("squat");
-//     Exercise ex3 = new Exercise("bench press");
-//     exercise_db database = new exercise_db();
-//     database.add(ex1);
-//     database.add(ex2);
-//     database.add(ex3);
+  public static void main(String[] args) {
+    Exercise ex1 = new Exercise("deadlift");
+    Exercise ex2 = new Exercise("squat");
+    Exercise ex3 = new Exercise("bench press");
+    exercise_db database = new exercise_db();
+    database.add(ex1);
+    database.add(ex2);
+    database.add(ex3);
 
-//     Exercise a = database.get("squat");
-//     System.out.println(a.toString());
-//   }
+    Exercise a = database.get("squat");
+    System.out.println(a.toString());
+  }
 }

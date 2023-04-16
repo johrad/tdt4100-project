@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Exercise implements ExerciseInterface {
 
-  private final String name;
+  private String name;
   private List<Integer> reps = new ArrayList<>();
   private List<Double> weight = new ArrayList<>();
 
   private int[] PR = new int[2];
 
-  // Contructor for creating the workout
+  // Constructor for creating the workout
   public Exercise(String name) {
     if (name.length() >= 3) { // add check if exercise exists in save-data
       this.name = name;
