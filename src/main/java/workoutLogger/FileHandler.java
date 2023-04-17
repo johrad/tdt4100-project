@@ -16,10 +16,8 @@ public class FileHandler {
     try {
       reader = new BufferedReader(new FileReader(filename));
       while ((line = reader.readLine()) != null) {
-        String[] row = line.split(",");
-        for (String s : row) {
-          System.out.println(s);
-        }
+        String[] row = line.split(";");
+        String name = row[0];
       }
     } catch (Exception e) {
       e.printStackTrace();
