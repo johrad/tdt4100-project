@@ -3,6 +3,10 @@ package workoutLogger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -11,12 +15,10 @@ public class FileHandler {
 
   // Exercise csv format -> name, last weight, last reps, PR
 
-  public void createdb(String fileName) {
+  private String createFile(String fileName) {
+    String filePath = "src/main/java/workoutLogger/" + fileName + ".csv";
     try {
-      File newFile = new File(
-        "src/main/java/workoutLogger/" + fileName + ".csv"
-      );
-
+      File newFile = new File(filePath);
       if (newFile.createNewFile()) {
         System.out.println(newFile.getName() + " Was created");
       } else {
@@ -25,10 +27,55 @@ public class FileHandler {
     } catch (Exception e) {
       e.printStackTrace();
     }
+    return filePath;
   }
 
   public void save(String filename, Exercise_db database) {
-    if (!(filename.isEmpty()) && !(database.getDB().isEmpty())) {}
+    if (!(filename.isEmpty()) && !(database.getDB().isEmpty())) {
+      String filePath = this.createFile(filename);
+      try {
+        // FileWriter writer = new FileWriter(filePath);
+        // BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+        // TODO: Check if current line the one trying to write. if so -> overwrite
+        List<String> lines = Files.readAllLines(
+          Paths.get(filePath),
+          StandardCharsets.UTF_8
+        );
+
+        for (Exercise exercise : database.getDB()) {
+          String toWrite =
+            exercise.getName() +
+            ";" +
+            this.buildStringList(exercise.getReps()) +
+            ";" +
+            this.buildStringList(exercise.getWeight()) +
+            ";" +
+            "90000"; // TODO: fix this
+          int lineNumber = 0;
+          for (String line : lines) {
+            if (line.split(";")[0].equals(exercise.getName().trim())) {
+              System.out.println("Found something to overwrite!");
+              lines.set(lineNumber - 1, toWrite); // TODO: Handle if first line needs changing
+            }
+            lineNumber++;
+          }
+          // TODO: HOW TO ADD NEW THINGS IN !!
+          // int lineNumber = 0;
+          // while ((line = reader.readLine()) != null) {
+          //   String[] row = line.split(";");
+          //   if (row[0].equals(exercise.getName().trim())) {
+          //     lineNumber++;
+          //   }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      } finally {
+        try {} catch (Exception e) {
+          // TODO: handle exception
+        }
+      }
+    }
   }
 
   public Collection<Exercise> loadExercises(String filename) {
@@ -44,6 +91,7 @@ public class FileHandler {
         List<Integer> reps = strToListInt(row[1]);
         List<Double> weight = strToListDouble(row[2]);
         // Double pr = Double.parseDouble(row[3].trim()); // TODO: fix PR stuff here
+
         // adding loaded exercises to collection:
         coll.add(new Exercise(name, reps, weight));
       }
@@ -52,7 +100,9 @@ public class FileHandler {
     } finally {
       try {
         reader.close();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        System.out.println("cant close???");
+      }
     }
 
     return coll;
@@ -85,6 +135,18 @@ public class FileHandler {
     return DoubleList;
   }
 
+  private String buildStringList(List list) {
+    StringBuilder sb = new StringBuilder("[");
+    for (int i = 0; i < list.size(); i++) {
+      sb.append(list.get(i));
+      if (i != list.size() - 1) {
+        sb.append(",");
+      }
+    }
+    sb.append("]");
+    return sb.toString();
+  }
+
   public static void main(String[] args) {
     System.out.println("testing file handler: ");
 
@@ -94,6 +156,7 @@ public class FileHandler {
       saves.loadExercises("src/main/java/workoutLogger/exercises.csv")
     );
     Exercise squat = db.get("squat");
-    System.out.println(squat.toString());
+    db.add(new Exercise("aids"));
+    saves.save("exercises", db);
   }
 }

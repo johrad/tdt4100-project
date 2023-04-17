@@ -9,6 +9,14 @@ public class Exercise implements ExerciseInterface {
   private List<Integer> reps = new ArrayList<>();
   private List<Double> weight = new ArrayList<>();
 
+  public List<Integer> getReps() {
+    return new ArrayList<Integer>(this.reps);
+  }
+
+  public List<Double> getWeight() {
+    return new ArrayList<Double>(this.weight);
+  }
+
   private int[] PR = new int[2]; // [reps, weight]
 
   // TODO: Decide if PR is going to be an array of two numbers, or a single number for the weight.
