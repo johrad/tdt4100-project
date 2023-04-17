@@ -11,6 +11,8 @@ public class Exercise implements ExerciseInterface {
 
   private int[] PR = new int[2]; // [reps, weight]
 
+  // TODO: Decide if PR is going to be an array of two numbers, or a single number for the weight.
+
   // Constructor for creating the workout
   public Exercise(String name) {
     if (name.length() >= 3) { // add check if exercise exists in save-data
@@ -26,13 +28,13 @@ public class Exercise implements ExerciseInterface {
   public Exercise(
     String name,
     List<Integer> reps,
-    List<Double> weight,
-    int[] pR
+    List<Double> weight
+    // int[] pR  TODO: uncomment when done
   ) {
     this.name = name;
     this.reps = reps;
     this.weight = weight;
-    PR = pR;
+    // PR = pR; TODO: uncomment when done
   }
 
   public String toString() {
@@ -46,7 +48,7 @@ public class Exercise implements ExerciseInterface {
     );
   }
 
-  private int latestReps() {
+  public int latestReps() {
     if (this.reps.size() < 1) {
       return 0;
     } else {
@@ -54,7 +56,7 @@ public class Exercise implements ExerciseInterface {
     }
   }
 
-  private double latestWeight() {
+  public double latestWeight() {
     if (this.weight.size() < 1) {
       return 0;
     } else {
@@ -79,10 +81,6 @@ public class Exercise implements ExerciseInterface {
   public String getName() {
     return this.name;
   }
-
-  //
-  // TODO:  Feilhåndtering here??
-  //
 
   private void logReps(int reps) {
     if (reps >= 0) {

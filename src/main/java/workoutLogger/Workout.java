@@ -31,11 +31,3 @@ public class Workout {
     return this.workoutName;
   }
 }
-/* How to save workouts to file?
- *
- * Save a normal txt file with the names of each workout
- * Once populated all previously created exercises with loops of some kind. This will however not spawn objects (?)
- * Generate a Collection<Exercise> on each boot. How find a certain exercise tho? Keeping track of index is a big no-no
- * Dictionaries?
- *
- */

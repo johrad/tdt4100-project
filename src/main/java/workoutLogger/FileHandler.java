@@ -1,19 +1,40 @@
 package workoutLogger;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class FileHandler {
 
   // Exercise csv format -> name, last weight, last reps, PR
 
-  public void save(String filename) {}
+  public void createdb(String fileName) {
+    try {
+      File newFile = new File(
+        "src/main/java/workoutLogger/" + fileName + ".csv"
+      );
 
-  public void loadExercises(String filename) {
+      if (newFile.createNewFile()) {
+        System.out.println(newFile.getName() + " Was created");
+      } else {
+        System.out.println(newFile.getName() + " already exists");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void save(String filename, Exercise_db database) {
+    if (!(filename.isEmpty()) && !(database.getDB().isEmpty())) {}
+  }
+
+  public Collection<Exercise> loadExercises(String filename) {
     BufferedReader reader = null;
     String line;
+    Collection<Exercise> coll = new ArrayList<>();
 
     try {
       reader = new BufferedReader(new FileReader(filename));
@@ -22,8 +43,9 @@ public class FileHandler {
         String name = row[0];
         List<Integer> reps = strToListInt(row[1]);
         List<Double> weight = strToListDouble(row[2]);
-        Double pr = Double.parseDouble(row[3].trim());
-        // adding loaded exercises to database:
+        // Double pr = Double.parseDouble(row[3].trim()); // TODO: fix PR stuff here
+        // adding loaded exercises to collection:
+        coll.add(new Exercise(name, reps, weight));
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -32,8 +54,11 @@ public class FileHandler {
         reader.close();
       } catch (Exception e) {}
     }
+
+    return coll;
   }
 
+  // Helper function to make code cleaner. Converts a string like [12,31,4,5,1,2] into a List of Integers.
   private List<Integer> strToListInt(String str) {
     str = str.substring(1, str.length() - 1); // Remove the square brackets
 
@@ -46,6 +71,7 @@ public class FileHandler {
     return intList;
   }
 
+  // Helper function to make code cleaner. Converts a string like [12.4,32.4,2.3] into a List of Doubles.
   private List<Double> strToListDouble(String str) {
     str = str.substring(1, str.length() - 1); // Remove the square brackets
 
@@ -63,6 +89,11 @@ public class FileHandler {
     System.out.println("testing file handler: ");
 
     FileHandler saves = new FileHandler();
-    saves.loadExercises("src/main/java/workoutLogger/exercises.csv");
+
+    Exercise_db db = new Exercise_db(
+      saves.loadExercises("src/main/java/workoutLogger/exercises.csv")
+    );
+    Exercise squat = db.get("squat");
+    System.out.println(squat.toString());
   }
 }
