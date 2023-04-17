@@ -9,7 +9,7 @@ public class Exercise implements ExerciseInterface {
   private List<Integer> reps = new ArrayList<>();
   private List<Double> weight = new ArrayList<>();
 
-  private int[] PR = new int[2];
+  private int[] PR = new int[2]; // [reps, weight]
 
   // Constructor for creating the workout
   public Exercise(String name) {
