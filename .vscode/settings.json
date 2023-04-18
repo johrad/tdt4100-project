@@ -1,7 +1,7 @@
 {
     "spellright.language": ["en"],
     "spellright.documentTypes": ["markdown", "latex", "plaintext", "java"],
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
     "editor.fontFamily": "Sauce Code Pro",
     "editor.codeLensFontFamily": "Sauce Code Pro",
     "editor.fontLigatures": true
