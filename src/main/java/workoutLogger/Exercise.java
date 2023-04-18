@@ -81,7 +81,7 @@ public class Exercise implements ExerciseInterface {
 
     if (vol > (PR[0] * PR[1])) {
       this.PR[0] = reps;
-      this.PR[1] = (int) weight; // FIX THIS !!
+      this.PR[1] = (int) weight; // TODO: FIX THIS !!
     }
   }
 

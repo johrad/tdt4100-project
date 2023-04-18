@@ -3,7 +3,7 @@ package workoutLogger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.lang.reflect.Executable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,15 +34,33 @@ public class FileHandler {
     if (!(filename.isEmpty()) && !(database.getDB().isEmpty())) {
       String filePath = this.createFile(filename);
       try {
-        // FileWriter writer = new FileWriter(filePath);
-        // BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-        // TODO: Check if current line the one trying to write. if so -> overwrite
         List<String> lines = Files.readAllLines(
           Paths.get(filePath),
           StandardCharsets.UTF_8
         );
+        // Copying to avoid 'java.util.ConcurrentModificationException'
+        List<String> LinesToWrite = new ArrayList<>(lines);
 
+        // for (Exercise exercise : database.getDB()) {
+        //   String toWrite =
+        //     exercise.getName() +
+        //     ";" +
+        //     this.buildStringList(exercise.getReps()) +
+        //     ";" +
+        //     this.buildStringList(exercise.getWeight()) +
+        //     ";" +
+        //     "90000"; // TODO: fix this
+        //   int lineNumber = 0;
+        //   for (String line : lines) {
+        //     if (line.split(";")[0].equals(exercise.getName().trim())) {
+        //       System.out.println("Found something to overwrite!");
+        //       LinesToWrite.set(lineNumber, toWrite);
+        //     } else {
+        //       LinesToWrite.add(toWrite); // new exercise to end of list.
+        //     }
+        //     lineNumber++;
+        //   }
+        // }
         for (Exercise exercise : database.getDB()) {
           String toWrite =
             exercise.getName() +
@@ -52,22 +70,22 @@ public class FileHandler {
             this.buildStringList(exercise.getWeight()) +
             ";" +
             "90000"; // TODO: fix this
-          int lineNumber = 0;
-          for (String line : lines) {
+          boolean foundLine = false;
+          for (int lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
+            String line = lines.get(lineNumber);
             if (line.split(";")[0].equals(exercise.getName().trim())) {
               System.out.println("Found something to overwrite!");
-              lines.set(lineNumber - 1, toWrite); // TODO: Handle if first line needs changing
+              LinesToWrite.set(lineNumber, toWrite);
+              foundLine = true;
+              break; // no need to check the rest of the lines
             }
-            lineNumber++;
           }
-          // TODO: HOW TO ADD NEW THINGS IN !!
-          // int lineNumber = 0;
-          // while ((line = reader.readLine()) != null) {
-          //   String[] row = line.split(";");
-          //   if (row[0].equals(exercise.getName().trim())) {
-          //     lineNumber++;
-          //   }
+          if (!foundLine) {
+            LinesToWrite.add(toWrite);
+          }
         }
+        // Write new String[] to file:
+        Files.write(Paths.get(filePath), LinesToWrite, StandardCharsets.UTF_8);
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
@@ -157,6 +175,12 @@ public class FileHandler {
     );
     Exercise squat = db.get("squat");
     db.add(new Exercise("aids"));
+    Exercise aids = db.get("aids");
+    squat.logSet(20, 111.5);
+    squat.logSet(20, 42.5);
+    aids.logSet(10, 111111.3);
+    System.out.println(aids.toString());
+
     saves.save("exercises", db);
   }
 }
