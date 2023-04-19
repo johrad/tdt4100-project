@@ -8,12 +8,16 @@ public class testingshit {
           "src/main/java/workoutLogger/exercises.csv"
         )
     );
-    Workout myWorkout = new Workout("myWorkout");
-    myWorkout.restoreExercises(db.getDB());
-    myWorkout.getExerciseNameList();
-
-    for (String s : myWorkout.getExerciseNameList()) {
+    for (Exercise ex : db.getDB()) {
+      String s =
+        ex.getName() +
+        " PR:" +
+        ex.getPR().get(0) +
+        "reps @ " +
+        ex.getPR().get(1);
       System.out.println(s);
     }
+    // FileHandler filehandler = new FileHandler();
+    // filehandler.save("src/main/java/workoutLogger/exercises.csv", db);
   }
 }

@@ -15,7 +15,7 @@ public class FileHandler {
   // Exercise csv format -> name, last weight, last reps, PR
 
   private String createFile(String fileName) {
-    String filePath = "src/main/java/workoutLogger/" + fileName + ".csv";
+    String filePath = fileName; //"src/main/java/workoutLogger/" + fileName + ".csv";
     try {
       File newFile = new File(filePath);
       if (newFile.createNewFile()) {
@@ -40,26 +40,6 @@ public class FileHandler {
         // Copying to avoid 'java.util.ConcurrentModificationException'
         List<String> LinesToWrite = new ArrayList<>(lines);
 
-        // for (Exercise exercise : database.getDB()) {
-        //   String toWrite =
-        //     exercise.getName() +
-        //     ";" +
-        //     this.buildStringList(exercise.getReps()) +
-        //     ";" +
-        //     this.buildStringList(exercise.getWeight()) +
-        //     ";" +
-        //     "90000"; // TODO: fix this
-        //   int lineNumber = 0;
-        //   for (String line : lines) {
-        //     if (line.split(";")[0].equals(exercise.getName().trim())) {
-        //       System.out.println("Found something to overwrite!");
-        //       LinesToWrite.set(lineNumber, toWrite);
-        //     } else {
-        //       LinesToWrite.add(toWrite); // new exercise to end of list.
-        //     }
-        //     lineNumber++;
-        //   }
-        // }
         for (Exercise exercise : database.getDB()) {
           String toWrite =
             exercise.getName() +
@@ -68,7 +48,7 @@ public class FileHandler {
             ";" +
             this.buildStringList(exercise.getWeight()) +
             ";" +
-            "90000"; // TODO: fix this
+            this.buildStringList(exercise.getPR());
           boolean foundLine = false;
           for (int lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
             String line = lines.get(lineNumber);
@@ -108,10 +88,10 @@ public class FileHandler {
         String name = row[0];
         List<Integer> reps = strToListInt(row[1]);
         List<Double> weight = strToListDouble(row[2]);
-        // Double pr = Double.parseDouble(row[3].trim()); // TODO: fix PR stuff here
+        List<Double> PR = strToListDouble(row[3]);
 
         // adding loaded exercises to collection:
-        coll.add(new Exercise(name, reps, weight));
+        coll.add(new Exercise(name, reps, weight, PR));
       }
     } catch (Exception e) {
       e.printStackTrace();

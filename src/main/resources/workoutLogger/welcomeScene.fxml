@@ -7,16 +7,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="410.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workoutLogger.workoutLogger_StartController">
    <children>
-      <Label alignment="CENTER" contentDisplay="TOP" layoutY="82.0" prefHeight="39.0" prefWidth="410.0" text="Welcome!">
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="2.0" layoutY="146.0" prefHeight="39.0" prefWidth="410.0" text="Welcome!">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Button layoutX="51.0" layoutY="238.0" mnemonicParsing="false" onAction="#switchToWorkoutScene" prefHeight="64.0" prefWidth="309.0" text="Start new workout" textAlignment="CENTER">
+      <Button layoutX="52.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchToWorkoutScene" prefHeight="64.0" prefWidth="309.0" text="Start new workout" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="51.0" layoutY="337.0" prefHeight="17.0" prefWidth="218.0" text="Your current PR' s are:" />
+      <Label alignment="CENTER" layoutX="97.0" layoutY="501.0" prefHeight="17.0" prefWidth="218.0" text="Created by Johan-Petter Dragic" />
+      <Label alignment="CENTER" contentDisplay="TOP" layoutY="7.0" prefHeight="39.0" prefWidth="410.0" text="TDT4100: Workout Logger">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="98.0" layoutY="472.0" prefHeight="17.0" prefWidth="218.0" text=" " />
    </children>
 </AnchorPane>

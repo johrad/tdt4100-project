@@ -8,16 +8,7 @@ public class Exercise implements ExerciseInterface {
   private String name;
   private List<Integer> reps = new ArrayList<>();
   private List<Double> weight = new ArrayList<>();
-
-  public List<Integer> getReps() {
-    return new ArrayList<Integer>(this.reps);
-  }
-
-  public List<Double> getWeight() {
-    return new ArrayList<Double>(this.weight);
-  }
-
-  private int[] PR = new int[2]; // [reps, weight]
+  private List<Double> PR = new ArrayList<>(); // [reps, weight]
 
   // TODO: Decide if PR is going to be an array of two numbers, or a single number for the weight.
 
@@ -36,17 +27,25 @@ public class Exercise implements ExerciseInterface {
   public Exercise(
     String name,
     List<Integer> reps,
-    List<Double> weight
-    // int[] pR  TODO: uncomment when done
+    List<Double> weight,
+    List<Double> pR
   ) {
     this.name = name;
     this.reps = reps;
     this.weight = weight;
-    // PR = pR; TODO: uncomment when done
+    this.PR = pR;
+  }
+
+  public List<Integer> getReps() {
+    return new ArrayList<Integer>(this.reps);
+  }
+
+  public List<Double> getWeight() {
+    return new ArrayList<Double>(this.weight);
   }
 
   public String toString() {
-    return (this.latestReps() + " reps @ " + this.latestWeight()); //  + "kg"
+    return (this.latestReps() + " reps @ " + this.latestWeight() + "kg");
   }
 
   public int latestReps() {
@@ -72,9 +71,9 @@ public class Exercise implements ExerciseInterface {
 
     double vol = reps * weight;
 
-    if (vol > (PR[0] * PR[1])) {
-      this.PR[0] = reps;
-      this.PR[1] = (int) weight; // TODO: FIX THIS !!
+    if (vol > (PR.get(0) * PR.get(1))) {
+      this.PR.set(0, Double.valueOf(reps));
+      this.PR.set(1, weight);
     }
   }
 
@@ -105,7 +104,7 @@ public class Exercise implements ExerciseInterface {
   }
 
   @Override
-  public int[] getPR() {
+  public List<Double> getPR() {
     return this.PR;
   }
 }

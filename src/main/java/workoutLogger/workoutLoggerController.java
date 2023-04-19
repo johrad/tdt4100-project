@@ -3,6 +3,7 @@ package workoutLogger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 public class workoutLoggerController implements Initializable {
 
   @FXML
-  private Label mylabel1;
+  private Label savedAlert;
 
   @FXML
   private TableView<Exercise> exerciseTable;
@@ -42,12 +43,28 @@ public class workoutLoggerController implements Initializable {
   @FXML
   private ChoiceBox<String> workoutChoiceBox;
 
+  private boolean hasSaved;
+
   @FXML
-  public void buttonPress(ActionEvent e) {
-    mylabel1.setText("test");
+  public void saveWorkout(ActionEvent e) throws IOException {
+    if (!hasSaved) {
+      Exercise_db db = new Exercise_db(
+        (new FileHandler()).loadExercises(
+            "src/main/java/workoutLogger/exercises.csv"
+          )
+      );
+      for (Exercise exercise : db.getDB()) {
+        exercise.logSet(exercise.latestReps(), exercise.latestWeight() + 2.50);
+      }
+      FileHandler filehandler = new FileHandler();
+      filehandler.save("src/main/java/workoutLogger/exercises.csv", db);
+      savedAlert.setText("Saved!");
+      this.hasSaved = true;
+    }
   }
 
   public void switchToWelcomeScene(ActionEvent event) throws IOException {
+    this.hasSaved = false;
     Stage stage;
     Parent root;
     Scene scene;
@@ -65,10 +82,6 @@ public class workoutLoggerController implements Initializable {
           "src/main/java/workoutLogger/exercises.csv"
         )
     );
-    Workout myWorkout = new Workout("myWorkout");
-    myWorkout.restoreExercises(db.getDB());
-
-    workoutChoiceBox.getItems().addAll(myWorkout.getExerciseNameList());
 
     // Populate Name column and last workout column:
     ObservableList<Exercise> data = FXCollections.observableArrayList(

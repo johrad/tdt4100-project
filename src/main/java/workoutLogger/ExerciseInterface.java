@@ -1,5 +1,7 @@
 package workoutLogger;
 
+import java.util.List;
+
 public interface ExerciseInterface {
   String getName();
 
@@ -7,5 +9,5 @@ public interface ExerciseInterface {
 
   double getVolume();
 
-  int[] getPR();
+  List<Double> getPR();
 }
