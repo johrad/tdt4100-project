@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class workoutLogger_StartController {
+public class workoutLogger_StartController implements Initializable {
 
   @FXML
   private Label prText;
@@ -37,20 +37,21 @@ public class workoutLogger_StartController {
     stage.setScene(scene);
     stage.show();
   }
-  // @Override
-  // public void initialize(URL location, ResourceBundle resources) {
-  //   Exercise_db db = new Exercise_db(
-  //     (new FileHandler()).loadExercises(
-  //         "src/main/java/workoutLogger/exercises.csv"
-  //       )
-  //   );
-  //   for (Exercise ex : db.getDB()) {
-  //     String s =
-  //       ex.getName() +
-  //       " PR:" +
-  //       ex.getPR().get(0) +
-  //       "reps @ " +
-  //       ex.getPR().get(1);
-  //   }
-  // }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    Exercise_db db = new Exercise_db(
+      (new FileHandler()).loadExercises(
+          "src/main/java/workoutLogger/exercises.csv"
+        )
+    );
+    for (Exercise ex : db.getDB()) {
+      String s =
+        ex.getName() +
+        " PR:" +
+        ex.getPR().get(0) +
+        "reps @ " +
+        ex.getPR().get(1);
+    }
+  }
 }

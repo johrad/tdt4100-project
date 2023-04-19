@@ -50,7 +50,7 @@ public class Exercise implements ExerciseInterface {
 
   public int latestReps() {
     if (this.reps.size() < 1) {
-      return 0;
+      return this.reps.get(0);
     } else {
       return this.reps.get(this.reps.size() - 1);
     }
@@ -58,7 +58,7 @@ public class Exercise implements ExerciseInterface {
 
   public double latestWeight() {
     if (this.weight.size() < 1) {
-      return 0;
+      return this.weight.get(0);
     } else {
       return this.weight.get(this.weight.size() - 1);
     }
@@ -71,6 +71,11 @@ public class Exercise implements ExerciseInterface {
 
     double vol = reps * weight;
 
+    if (this.PR.isEmpty()) {
+      this.PR.add(Double.valueOf(reps));
+      this.PR.add(weight);
+      return;
+    }
     if (vol > (PR.get(0) * PR.get(1))) {
       this.PR.set(0, Double.valueOf(reps));
       this.PR.set(1, weight);
@@ -106,5 +111,13 @@ public class Exercise implements ExerciseInterface {
   @Override
   public List<Double> getPR() {
     return this.PR;
+  }
+
+  public static void main(String[] args) {
+    Exercise exercise = new Exercise("Bench Press");
+    exercise.logSet(10, 100);
+    System.out.println(exercise.latestReps());
+    exercise.logSet(12, 110);
+    System.out.println(exercise.getPR());
   }
 }
