@@ -1,4 +1,4 @@
-package workoutLogger.Model;
+package workoutLogger;
 
 import java.util.ArrayList;
 import java.util.List;

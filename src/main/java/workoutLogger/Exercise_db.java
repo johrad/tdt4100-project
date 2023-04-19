@@ -1,4 +1,4 @@
-package workoutLogger.Model;
+package workoutLogger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,17 +51,16 @@ public class Exercise_db {
   public Collection<Exercise> getDB() {
     return (new ArrayList<>(this.exerciseCollection)); // Returns a copy of the list. such that the user cannot mess anything up in it.
   }
+  // public static void main(String[] args) {
+  //   Exercise ex1 = new Exercise("deadlift");
+  //   Exercise ex2 = new Exercise("squat");
+  //   Exercise ex3 = new Exercise("bench press");
+  //   Exercise_db database = new Exercise_db();
+  //   database.add(ex1);
+  //   database.add(ex2);
+  //   database.add(ex3);
 
-  public static void main(String[] args) {
-    Exercise ex1 = new Exercise("deadlift");
-    Exercise ex2 = new Exercise("squat");
-    Exercise ex3 = new Exercise("bench press");
-    Exercise_db database = new Exercise_db();
-    database.add(ex1);
-    database.add(ex2);
-    database.add(ex3);
-
-    Exercise a = database.get("squat");
-    System.out.println(a.toString());
-  }
+  //   Exercise a = database.get("squat");
+  //   System.out.println(a.toString());
+  // }
 }

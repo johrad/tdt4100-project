@@ -1,4 +1,4 @@
-package workoutLogger.Model;
+package workoutLogger;
 
 public interface ExerciseInterface {
   String getName();

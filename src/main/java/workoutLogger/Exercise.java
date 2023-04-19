@@ -1,4 +1,4 @@
-package workoutLogger.Model;
+package workoutLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class Exercise implements ExerciseInterface {
   public int latestReps() {
     if (this.reps.size() < 1) {
       return 0;
-    } else {
+    } else { // TODO: Handle if reps is zero
       return this.reps.get(this.reps.size() - 1);
     }
   }
@@ -115,21 +115,20 @@ public class Exercise implements ExerciseInterface {
   public int[] getPR() {
     return this.PR;
   }
+  //   public static void main(String[] args) {
+  //     // Exercise bench = new Exercise("Bench Press");
+  //     // // bench.logSet(10, 100000);
+  //     // // bench.logSet(10, 53.5);
+  //     // // System.out.println(bench.toString());
+  //     // // System.out.println(bench.getPR()[1]);
+  //     // int i = 0;
+  //     // List<Exercise> exerciseList = new ArrayList<>();
+  //     // while (i < 5) {
+  //     //   String name = "exercise_" + i;
+  //     //   exerciseList.add(new Exercise(name));
+  //     //   i++;
+  //     // }
 
-  public static void main(String[] args) {
-    // Exercise bench = new Exercise("Bench Press");
-    // // bench.logSet(10, 100000);
-    // // bench.logSet(10, 53.5);
-    // // System.out.println(bench.toString());
-    // // System.out.println(bench.getPR()[1]);
-    // int i = 0;
-    // List<Exercise> exerciseList = new ArrayList<>();
-    // while (i < 5) {
-    //   String name = "exercise_" + i;
-    //   exerciseList.add(new Exercise(name));
-    //   i++;
-    // }
-
-    // System.out.println(exerciseList.get(2).getName());
-  }
+  //     // System.out.println(exerciseList.get(2).getName());
+  //   }
 }

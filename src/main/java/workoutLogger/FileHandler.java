@@ -1,4 +1,4 @@
-package workoutLogger.Model;
+package workoutLogger;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -164,23 +164,22 @@ public class FileHandler {
     sb.append("]");
     return sb.toString();
   }
+  // public static void main(String[] args) {
+  //   System.out.println("testing file handler: ");
 
-  public static void main(String[] args) {
-    System.out.println("testing file handler: ");
+  //   FileHandler saves = new FileHandler();
 
-    FileHandler saves = new FileHandler();
+  //   Exercise_db db = new Exercise_db(
+  //     saves.loadExercises("src/main/java/workoutLogger/exercises.csv")
+  //   );
+  //   Exercise squat = db.get("squat");
+  //   db.add(new Exercise("aids"));
+  //   Exercise aids = db.get("aids");
+  //   squat.logSet(20, 111.5);
+  //   squat.logSet(20, 42.5);
+  //   aids.logSet(10, 111111.3);
+  //   System.out.println(aids.toString());
 
-    Exercise_db db = new Exercise_db(
-      saves.loadExercises("src/main/java/workoutLogger/exercises.csv")
-    );
-    Exercise squat = db.get("squat");
-    db.add(new Exercise("aids"));
-    Exercise aids = db.get("aids");
-    squat.logSet(20, 111.5);
-    squat.logSet(20, 42.5);
-    aids.logSet(10, 111111.3);
-    System.out.println(aids.toString());
-
-    saves.save("exercises", db);
-  }
+  //   saves.save("exercises", db);
+  // }
 }

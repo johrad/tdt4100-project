@@ -27,6 +27,11 @@
 	</dependency>
   </dependencies>
 
+  
+
+
+
+
   <build>
 	<plugins>
 	  <plugin>
@@ -50,6 +55,15 @@
 			  <argLine>--enable-preview</argLine>
 		  </configuration>
 	  </plugin>
+	  <plugin>
+    <groupId>com.gluonhq</groupId>
+    <artifactId>gluonfx-maven-plugin</artifactId>
+    <version>1.0.18</version>
+    <configuration>
+        <mainClass>your.mainClass</mainClass>
+    </configuration>
+</plugin>
+
 
 	</plugins>
   </build>
