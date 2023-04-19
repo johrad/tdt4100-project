@@ -12,7 +12,7 @@ public class workoutLoggerApp extends Application {
     // Group root = new Group();
     // Scene scene = new Scene(root, Color.AQUAMARINE);
     primaryStage.setScene(
-      new Scene(FXMLLoader.load(getClass().getResource("App1.fxml")))
+      new Scene(FXMLLoader.load(getClass().getResource("welcomeScene.fxml")))
     );
 
     primaryStage.setTitle("TDT4100: Workout Tracker");

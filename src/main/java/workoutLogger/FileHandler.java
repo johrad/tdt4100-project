@@ -3,7 +3,6 @@ package workoutLogger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.lang.reflect.Executable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -97,6 +96,7 @@ public class FileHandler {
   }
 
   public Collection<Exercise> loadExercises(String filename) {
+    // filename = filename + ".csv";
     BufferedReader reader = null;
     String line;
     Collection<Exercise> coll = new ArrayList<>();
@@ -153,7 +153,7 @@ public class FileHandler {
     return DoubleList;
   }
 
-  private String buildStringList(List list) {
+  private String buildStringList(List list) { // Ref generic type because can be Integer or Double
     StringBuilder sb = new StringBuilder("[");
     for (int i = 0; i < list.size(); i++) {
       sb.append(list.get(i));
@@ -164,22 +164,4 @@ public class FileHandler {
     sb.append("]");
     return sb.toString();
   }
-  // public static void main(String[] args) {
-  //   System.out.println("testing file handler: ");
-
-  //   FileHandler saves = new FileHandler();
-
-  //   Exercise_db db = new Exercise_db(
-  //     saves.loadExercises("src/main/java/workoutLogger/exercises.csv")
-  //   );
-  //   Exercise squat = db.get("squat");
-  //   db.add(new Exercise("aids"));
-  //   Exercise aids = db.get("aids");
-  //   squat.logSet(20, 111.5);
-  //   squat.logSet(20, 42.5);
-  //   aids.logSet(10, 111111.3);
-  //   System.out.println(aids.toString());
-
-  //   saves.save("exercises", db);
-  // }
 }
