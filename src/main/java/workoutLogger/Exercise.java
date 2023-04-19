@@ -46,14 +46,7 @@ public class Exercise implements ExerciseInterface {
   }
 
   public String toString() {
-    return (
-      this.name +
-      " (Last workout): " +
-      this.latestReps() +
-      " reps @ " +
-      this.latestWeight() +
-      "kg"
-    );
+    return (this.latestReps() + " reps @ " + this.latestWeight()); //  + "kg"
   }
 
   public int latestReps() {
