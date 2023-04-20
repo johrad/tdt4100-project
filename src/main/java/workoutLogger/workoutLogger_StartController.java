@@ -2,6 +2,8 @@ package workoutLogger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,13 +47,16 @@ public class workoutLogger_StartController implements Initializable {
           "src/main/java/workoutLogger/exercises.csv"
         )
     );
-    for (Exercise ex : db.getDB()) {
-      String s =
-        ex.getName() +
-        " PR:" +
-        ex.getPR().get(0) +
-        "reps @ " +
-        ex.getPR().get(1);
-    }
+
+    // Get random PR on start screen:
+    Exercise ex = new ArrayList<Exercise>(db.getDB())
+      .get(new Random().nextInt(db.getDB().size()));
+    String s =
+      ex.getName() +
+      " PR: " +
+      ex.getPR().get(0) +
+      "reps @ " +
+      ex.getPR().get(1);
+    prText.setText(s);
   }
 }

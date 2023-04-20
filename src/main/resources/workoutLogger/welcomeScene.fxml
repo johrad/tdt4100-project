@@ -23,6 +23,10 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="98.0" layoutY="472.0" prefHeight="17.0" prefWidth="218.0" text=" " />
+      <Label fx:id="prText" alignment="CENTER" layoutX="42.0" layoutY="420.0" prefHeight="64.0" prefWidth="331.0" text="&gt;pr here&lt;" textFill="#978080">
+         <font>
+            <Font name="System Italic" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
