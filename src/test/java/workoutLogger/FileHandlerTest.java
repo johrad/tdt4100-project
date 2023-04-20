@@ -10,7 +10,7 @@ public class FileHandlerTest {
 
   @Test
   @DisplayName("Save a database")
-  public void testSaveWithNonEmptyFilename() throws Exception {
+  public void saveAndLoadTest() throws Exception {
     FileHandler fileHandler = new FileHandler();
     // create an exercise database with some data
     Exercise_db db = new Exercise_db();

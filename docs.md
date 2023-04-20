@@ -11,7 +11,7 @@ See picture:
 <div align="center"> 
 <img src="docs/images/uml.png"
      alt="hello"
-     style="float: center; margin-right: 10px;" width = 270px/>
+     style="float: center; margin-right: 10px;" width = 370px/>
 </div>
 
 ## Part 3: 

@@ -56,7 +56,8 @@ public class workoutLogger_StartController implements Initializable {
       " PR: " +
       ex.getPR().get(0) +
       "reps @ " +
-      ex.getPR().get(1);
+      ex.getPR().get(1) +
+      "kg";
     prText.setText(s);
   }
 }
